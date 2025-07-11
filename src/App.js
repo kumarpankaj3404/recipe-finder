@@ -1,14 +1,17 @@
-import Footer from "./components/Footer.js";
+import Footer from "./components/Footer.jsx";
 import Navigation from "./components/Navigation";
+import Serch from "./components/Serch.jsx";
 
 function App() {
+  
   return (
     <>
       <Navigation />
-      <h1>Hello</h1>
+      <Serch />
       <Footer />
 
     </>
+
   )
 }
 

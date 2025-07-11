@@ -10,9 +10,11 @@ const Navigation = () => {
         <h1 className='text-4xl'>Recipe Finder</h1>
       </div>
     
-      <div className='flex gap-5 mr-10'>
+      <div className='flex items-center gap-5 mr-10'>
         <p>Home</p>
-        <p>Fav</p>
+        <button id="like1">
+          <img src="./images/w-heart.svg" alt="" className='h-5 w-5'/>
+        </button>
       </div>
       
     </div>
