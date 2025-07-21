@@ -38,11 +38,29 @@ const Recipe = (props) => {
       image: './images/cake.svg'
     }
   ]
-  function handleLike(id){
+  function handleLike(id,name, description, image) {
     setLiked((prev) =>({
       ...prev,
       [id] : !prev[id]
     }));
+    fetch('http://localhost:8000/fav',{
+      method: 'POST',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: id,
+        name: name,
+        description: description,
+        image: image
+      })}).then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      }).catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    })
   };
 
   useEffect(() => {
@@ -67,7 +85,7 @@ const Recipe = (props) => {
 
         {dataRender.map((food)=>(
           <div key={food.idMeal || food.id} className="border-2 p-7 m-6 border-black w-40 rounded-2xl flex flex-col items-center hover:scale-110 " >
-            <button className='relative top-0 left-12' id="like2" onClick={() => handleLike(food.id ||food.idMeal)}>
+            <button className='relative top-0 left-12' id="like2" onClick={() => handleLike(food.id ||food.idMeal, food.name || food.strMeal, food.strArea ? `${food.strArea} • ${food.strCategory}` : food.description , food.image || food.strMealThumb)}>
               <img src={liked[food.id || food.idMeal] ?"./images/f-heart.svg":"./images/b-heart.svg"} alt="" className='h-5 w-5'/>
             </button>
             <a href={food.strYoutube || ""} target='blank'>
