@@ -7,7 +7,7 @@ const Serch = () => {
     e.preventDefault();
   }
   return (
-    <div className='flex flex-col justify-center items-center w-screen mt-20'>
+    <div className='flex flex-col justify-center items-center w-screen mt-20' >
         <div>
             <h1 className='text-3xl text-center font-bold'>Recipe Finder</h1>
             <p>Search main ingredient below to display recipes</p>

@@ -7,46 +7,22 @@
       "image": "./images/pizza.svg"
     },
     {
-      "id": 3,
-      "name": "Caesar Salad",
-      "description": "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan.",
-      "image": "./images/salad.svg"
-    },
-    {
-      "id": 5,
-      "name": "Chocolate Cake",
-      "description": "Rich and moist chocolate cake topped with chocolate ganache.",
-      "image": "./images/cake.svg"
-    },
-    {
-      "id": "52831",
-      "name": "Chicken Karaage",
-      "description": "Japanese • Chicken",
-      "image": "https://www.themealdb.com/images/media/meals/tyywsw1505930373.jpg"
-    },
-    {
-      "id": "52934",
-      "name": "Chicken Basquaise",
-      "description": "French • Chicken",
-      "image": "https://www.themealdb.com/images/media/meals/wruvqv1511880994.jpg"
-    },
-    {
-      "id": 2,
+      "id": "2",
       "name": "Veggie Burger",
       "description": "A delicious burger with a plant-based patty and fresh veggies.",
       "image": "./images/burger.svg"
     },
     {
-      "id": 4,
-      "name": "Pasta Alfredo",
-      "description": "Creamy Alfredo sauce tossed with fettuccine pasta and herbs.",
-      "image": "./images/pasta.svg"
+      "id": "3",
+      "name": "Caesar Salad",
+      "description": "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan.",
+      "image": "./images/salad.svg"
     },
     {
-      "id": "53073",
-      "name": "Eggplant Adobo",
-      "description": "Filipino • Vegetarian",
-      "image": "https://www.themealdb.com/images/media/meals/y7h0lq1683208991.jpg"
+      "id": "5",
+      "name": "Chocolate Cake",
+      "description": "Rich and moist chocolate cake topped with chocolate ganache.",
+      "image": "./images/cake.svg"
     }
   ]
 }
