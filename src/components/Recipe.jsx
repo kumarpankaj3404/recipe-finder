@@ -7,6 +7,7 @@ const Recipe = (props) => {
   const [recipe,setRecipe]= useState([]);
   const [liked, setLiked] = useState([]);
   const [changed, setChanged] = useState(false);
+  const [searchType, setSearchType] = useState(`s=${props.search}`);
 
   const recipes = [
     {
@@ -51,8 +52,7 @@ const Recipe = (props) => {
   }, [data]);
 
   function handleLike(id,name, description, image) {
-    //POST request to add to favorites
-    setChanged(!changed); // Toggle the state to re-fetch data
+    setChanged(!changed); 
     if(!liked.includes(id)) {
       fetch('http://localhost:8000/fav', {
         method: 'POST',
@@ -94,10 +94,11 @@ const Recipe = (props) => {
     axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${props.search}`)
     .then((res) => {
       if (res.data.meals) {
-        setRecipe(res.data.meals);  // ✅ Save the response
+        setRecipe(res.data.meals); 
+        console.log(Recipe);
         console.log("API response:", res.data.meals);
       } else {
-        setRecipe([]);  // No meals found
+        setRecipe([]);
       }
     })
     .catch(err => {
@@ -109,18 +110,18 @@ const Recipe = (props) => {
 
   return (
     <div className='min-h-svh'>
-      <div className='grid grid-cols-5 '>
+      <div className='grid grid-cols-4 '>
 
         {dataRender.map((food)=>(
-          <div key={food.idMeal || food.id} className="border-2 p-7 m-6 border-black w-40 rounded-2xl flex flex-col items-center hover:scale-110 " >
-            <button className='relative top-0 left-12' id="like2" onClick={() => handleLike(food.id ||food.idMeal, food.name || food.strMeal, food.strArea ? `${food.strArea} • ${food.strCategory}` : food.description , food.image || food.strMealThumb)}>
+          <div key={food.idMeal || food.id} className=" relative border-2 p-7 m-6 border-gray-300 w-72 rounded-2xl flex flex-col items-center hover:scale-110 " >
+            <button className='absolute top-2 right-2' id="like2" onClick={() => handleLike(food.id ||food.idMeal, food.name || food.strMeal, food.strArea ? `${food.strArea} • ${food.strCategory}` : food.description , food.image || food.strMealThumb)}>
               <img src={liked.includes(food.id || food.idMeal) ?"./images/f-heart.svg":"./images/b-heart.svg"} alt="" className='h-5 w-5'/>
             </button>
             <a href={food.strYoutube || ""} target='blank'>
-              <img src={food.image || food.strMealThumb} alt="image" width={60} height={45}/>
+              <img src={food.image || food.strMealThumb} alt="image" width={120} height={90}/>
+            </a>
               <h1 className='text-xl font-bold mt-2 text-center'>{food.name || food.strMeal}</h1>
               <p className='text-sm text-gray-600 text-center'>{food.strArea ? `${food.strArea} • ${food.strCategory}` : food.description}</p>
-            </a>
           </div>
         ))}
 

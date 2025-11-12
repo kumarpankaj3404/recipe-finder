@@ -1,28 +1,22 @@
 {
   "fav": [
     {
-      "id": "1",
-      "name": "Margherita Pizza",
-      "description": "Classic Italian pizza with tomato, mozzarella, and basil.",
-      "image": "./images/pizza.svg"
+      "id": "52962",
+      "name": "Salmon Eggs Eggs Benedict",
+      "description": "American • Breakfast",
+      "image": "https://www.themealdb.com/images/media/meals/1550440197.jpg"
     },
     {
-      "id": "2",
-      "name": "Veggie Burger",
-      "description": "A delicious burger with a plant-based patty and fresh veggies.",
-      "image": "./images/burger.svg"
+      "id": "53073",
+      "name": "Eggplant Adobo",
+      "description": "Filipino • Vegetarian",
+      "image": "https://www.themealdb.com/images/media/meals/y7h0lq1683208991.jpg"
     },
     {
-      "id": "3",
-      "name": "Caesar Salad",
-      "description": "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan.",
-      "image": "./images/salad.svg"
-    },
-    {
-      "id": "5",
-      "name": "Chocolate Cake",
-      "description": "Rich and moist chocolate cake topped with chocolate ganache.",
-      "image": "./images/cake.svg"
+      "id": "52817",
+      "name": "Stovetop Eggplant With Harissa, Chickpeas, and Cumin Yogurt",
+      "description": "American • Vegetarian",
+      "image": "https://www.themealdb.com/images/media/meals/yqwtvu1487426027.jpg"
     }
   ]
 }
