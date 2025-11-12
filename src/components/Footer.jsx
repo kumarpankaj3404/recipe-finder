@@ -2,8 +2,8 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div className='bottom-0 h-10 bg-gray-300 text-2xl w-screen text-center'>
-        This is footer
+    <div className='bottom-0 h-8 bg-gray-300  w-screen text-center'>
+      <p className='pt-2'>© 2024 Recipe Finder. All rights reserved.</p>
     </div>
   )
 }
