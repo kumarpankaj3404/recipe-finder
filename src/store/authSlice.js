@@ -1,13 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import supabase from '../supabaseClient';
-
-// Thunk for Signup (Custom User Table)
 export const signupUser = createAsyncThunk(
     'auth/signupUser',
     async ({ email, password, fullName }, { rejectWithValue }) => {
         try {
             // 1. Check if user exists
-            const { data: existingUser, error: checkError } = await supabase
+            const { data: existingUser } = await supabase
                 .from('User')
                 .select('email')
                 .eq('email', email)
@@ -16,11 +14,6 @@ export const signupUser = createAsyncThunk(
             if (existingUser) {
                 throw new Error('User already exists');
             }
-
-            // Ignore "PGRST116: JSON object requested, multiple (or no) rows returned" which acts as "User not found"
-            // But actually .single() returns error if not found.
-
-            // 2. Insert new user
             const { data, error } = await supabase
                 .from('User')
                 .insert([
@@ -41,7 +34,6 @@ export const signupUser = createAsyncThunk(
     }
 );
 
-// Thunk for Login (Custom User Table)
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
     async ({ email, password }, { rejectWithValue }) => {
@@ -61,11 +53,9 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-// Thunk for Logout
 export const logoutUser = createAsyncThunk(
     'auth/logoutUser',
     async (_, { rejectWithValue }) => {
-        // No server-side session to kill for custom table auth, just clear client state
         return null;
     }
 );
@@ -88,7 +78,6 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // Signup
             .addCase(signupUser.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -102,7 +91,6 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            // Login
             .addCase(loginUser.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -116,7 +104,6 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            // Logout
             .addCase(logoutUser.fulfilled, (state) => {
                 state.user = null;
                 localStorage.removeItem('user');

@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import supabase from '../supabaseClient';
 
-// Thunk to fetch favorites from Supabase
-// Thunk to fetch favorites from Supabase
 export const fetchFavorites = createAsyncThunk(
     'favorites/fetchFavorites',
     async (userId, { rejectWithValue }) => {
@@ -20,12 +18,11 @@ export const fetchFavorites = createAsyncThunk(
     }
 );
 
-// Thunk to add favorite
+
 export const addFavorite = createAsyncThunk(
     'favorites/addFavorite',
     async ({ userId, recipe }, { rejectWithValue }) => {
         try {
-            // Create payload matching User's schema (No recipe_id)
             const payload = {
                 user_id: userId,
                 name: recipe.name,
@@ -46,7 +43,7 @@ export const addFavorite = createAsyncThunk(
     }
 );
 
-// Thunk to remove favorite
+
 export const removeFavorite = createAsyncThunk(
     'favorites/removeFavorite',
     async (id, { rejectWithValue }) => {
@@ -74,7 +71,6 @@ const favoritesSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            // Fetch Favorites
             .addCase(fetchFavorites.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -87,11 +83,9 @@ const favoritesSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
-            // Add Favorite
             .addCase(addFavorite.fulfilled, (state, action) => {
                 state.items.push(action.payload);
             })
-            // Remove Favorite
             .addCase(removeFavorite.fulfilled, (state, action) => {
                 state.items = state.items.filter((item) => item.id !== action.payload);
             });

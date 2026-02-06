@@ -10,8 +10,6 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // No Supabase Auth listener needed for custom table auth. 
-  // State is persisted in localStorage via authSlice.
 
   const handleLogout = () => {
     dispatch(logoutUser());

@@ -81,12 +81,7 @@ const Recipe = (props) => {
           promises.push(axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${props.area}`));
         }
 
-        // If no filters, clear recipes (or could show defaults, but let's clear for search results)
         if (promises.length === 0) {
-          // If accessing via direct route without search context (e.g. category details), handled by props.searchValue checks below?
-          // Actually, CategoryDetails uses: <Recipe searchValue={category} searchType="category" />
-          // We need to support the legacy props.searchValue/searchType for CategoryDetails OR update CategoryDetails to use new props.
-
           if (props.searchValue) {
             let url = '';
             if (props.searchType === 'category') url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${props.searchValue}`;
@@ -104,21 +99,17 @@ const Recipe = (props) => {
 
         const responses = await Promise.all(promises);
 
-        // Extract meals from responses
-        // responses[i].data.meals can be null if no results
         const resultSets = responses.map(res => res.data.meals || []);
 
-        // Find intersection of all result sets
-        // Start with the first set
+        
         let finalMeals = resultSets[0];
 
-        // Filter by subsequent sets
+      
         for (let i = 1; i < resultSets.length; i++) {
           const currentSetIds = new Set(resultSets[i].map(meal => meal.idMeal));
           finalMeals = finalMeals.filter(meal => currentSetIds.has(meal.idMeal));
         }
 
-        // Apply Sorting
         if (finalMeals.length > 0 && props.sort) {
           finalMeals.sort((a, b) => {
             const nameA = (a.strMeal || a.name).toLowerCase();

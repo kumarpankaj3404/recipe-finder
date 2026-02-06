@@ -17,7 +17,7 @@ export default  function useFetch(url){
             if(isMounted){
                setData(data);
                 setError(false); 
-            }// Prevent state update if component is unmounted
+            }
         })
         .catch(err =>{
             if(isMounted){
@@ -25,7 +25,7 @@ export default  function useFetch(url){
             }
         }) 
         return () => {
-            isMounted = false; // Cleanup function to set isMounted to false
+            isMounted = false;
         };
     },[url]);
 
