@@ -54,10 +54,6 @@ const Fav = () => {
                                 <FaTrashAlt className='h-4 w-4 text-white' />
                             </button>
 
-                            {/* Clickable Card -> YouTube (Logic from Refactor) */}
-                            {/* Note: In favorites we might not have strYoutube unless we saved it, but schema didn't have it. 
-                                So we construct a search link like in Recipe.jsx 
-                            */}
                             <a href={`https://www.youtube.com/results?search_query=${food.name}`} target='_blank' rel="noreferrer" className="block h-full">
                                 <div className="h-48 overflow-hidden">
                                     <img
