@@ -1,49 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavorite, removeFavorite, fetchFavorites } from '../store/favoritesSlice';
+import { addFavorite, removeFavorite } from '../store/favoritesSlice';
 import { AiFillHeart, AiOutlineHeart, AiOutlineClose } from "react-icons/ai";
 
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
   const favorites = useSelector((state) => state.favorites.items);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
 
-
-  useEffect(() => {
-    if (user?.id) {
-      dispatch(fetchFavorites(user.id));
-    }
-  }, [dispatch, user]);
-
   const handleLike = (food) => {
-    if (!user) {
-      alert("Please login to save favorites!");
-      return;
-    }
-
+    const recipeId = food.idMeal || food.id || food.name || food.strMeal;
     const recipeName = food.name || food.strMeal;
-    // Check if liked by matching NAME since we don't have recipe_id in schema
-    const isLiked = favorites.some((fav) => fav.name === recipeName);
+    const isLiked = favorites.some((fav) => fav.id === recipeId);
 
     if (!isLiked) {
       const recipeData = {
-        // recipe_id: recipeId, // Removed as per schema
+        id: recipeId,
         name: recipeName,
         description: food.strArea ? `${food.strArea} • ${food.strCategory}` : food.description,
         image: food.image || food.strMealThumb,
       };
-      dispatch(addFavorite({ userId: user.id, recipe: recipeData }));
+      dispatch(addFavorite(recipeData));
     } else {
-      // Find the database ID of the favorite to remove based on Name
-      const favoriteToRemove = favorites.find(fav => fav.name === recipeName);
-
-      if (favoriteToRemove && favoriteToRemove.id) {
-        dispatch(removeFavorite(favoriteToRemove.id));
-      }
+      dispatch(removeFavorite(recipeId));
     }
   };
 
@@ -143,7 +125,7 @@ const Recipe = (props) => {
               className='absolute top-3 right-3 z-20 bg-black/40 backdrop-blur-md p-2 rounded-full shadow-sm hover:bg-neutral-800 transition group-hover:opacity-100'
               onClick={() => handleLike(food)}
             >
-              {favorites.some(fav => fav.name === (food.name || food.strMeal)) ?
+              {favorites.some(fav => fav.id === (food.idMeal || food.id || food.name || food.strMeal)) ?
                 <AiFillHeart className='h-6 w-6 text-red-500' /> :
                 <AiOutlineHeart className='h-6 w-6 text-gray-300 hover:text-red-400 transition-colors' />
               }

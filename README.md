@@ -7,8 +7,7 @@ Recipe Finder is a modern React application that allows users to discover, brows
 -   **Search Recipes**: Find recipes by name or ingredient.
 -   **Browse by Category**: Explore meals from various categories (e.g., Seafood, Vegan, Pasta).
 -   **Recipe Details**: View comprehensive details including ingredients, measurements, and cooking instructions.
--   **Favorites**: Save your favorite recipes to a personalized list (requires login).
--   **User Authentication**: Secure login and signup functionality powered by Supabase.
+-   **Favorites**: Save your favorite recipes locally in the browser.
 -   **Responsive Design**: Optimized for both desktop and mobile devices.
 
 ## Tech Stack
@@ -16,7 +15,7 @@ Recipe Finder is a modern React application that allows users to discover, brows
 -   **Frontend**: React.js
 -   **State Management**: Redux Toolkit
 -   **Styling**: Tailwind CSS
--   **Backend / Auth**: Supabase
+-   **Backend / Auth**: None required
 -   **Routing**: React Router
 -   **Icons**: React Icons
 
@@ -42,15 +41,7 @@ Follow these steps to get the project running locally on your machine.
     npm install
     ```
 
-3.  **Environment Setup**
-    Create a `.env` file in the root directory and add your Supabase credentials:
-    ```env
-    REACT_APP_SUPABASE_URL=your_supabase_url
-    REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
-    ```
-    > Note: You need a Supabase project to get these keys.
-
-4.  **Run the application**
+3.  **Run the application**
     ```bash
     npm start
     ```

@@ -1,30 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFavorites, removeFavorite } from '../store/favoritesSlice';
+import { removeFavorite } from '../store/favoritesSlice';
 import { FaTrashAlt } from "react-icons/fa";
 
 const Fav = () => {
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.auth);
     const { items: favorites, loading, error } = useSelector((state) => state.favorites);
-
-    useEffect(() => {
-        if (user?.id) {
-            dispatch(fetchFavorites(user.id));
-        }
-    }, [dispatch, user]);
 
     const handleRemove = (id) => {
         dispatch(removeFavorite(id));
     };
-
-    if (!user) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <p className="text-xl">Please login to view your favorites.</p>
-            </div>
-        );
-    }
 
     if (loading) return <div className="text-center mt-20 text-white text-xl">Loading...</div>;
     if (error) return <div className="text-center mt-20 text-red-500 text-xl font-bold">Error: {error}</div>;
